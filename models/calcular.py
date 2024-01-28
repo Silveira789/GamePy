@@ -35,24 +35,51 @@ class Calcular:
         if self.operacao == 1:
             op = 'somar'
         elif self.operacao == 2:
-            op = 'subração'
+            op = 'subtrair'
         elif self.operacao == 3:
-            op = 'multiplicacao'
+            op = 'multiplicar'
         else:
             op = 'Operação desconhecida'
         return f"Valor 1: {self.valor1} \nValor 2: {self.valor2} \nDficuldade: {self.dificulade} \nOperação: {op}"
 
     @property
     def _gerar_valor(self: object) -> int:
-        pass
+        if self.dificulade == 1:
+            return randint(0, 10)
+        elif self.dificulade == 2:
+            return randint(0, 100)
+        elif self.dificulade == 3:
+            return randint(0, 1000)
+        else:
+            return randint(0, 1000)
 
     @property
     def _gerar_resultado(self: object) -> int:
-        pass
+        if self.operacao == 1:
+            return self.valor1 + self.valor2
+        elif self.operacao == 2:
+            return self.valor1 - self.valor2
+        else:
+            return self.valor1 * self.valor2
 
     @property
-    def checar_resultado(self: object, resposta: int) -> bool:
-        pass
+    def _op_simbolo(self) -> str:
+        if self.operacao == 1:
+            return '+'
+        if self.operacao == 2:
+            return '-'
+        else:
+            return '*'
 
-    def mostrar_operacao(self: object) -> None:
-        pass
+    def checar_resultado(self, resposta: int) -> bool:
+        certo: bool = False
+
+        if self.resultado == resposta:
+            print('Resposta Correta!')
+            certo = True
+        else:
+            print('Resposta Errada!')
+        print(f"{self.valor1} {self._op_simbolo} {self.valor2} = {self.resultado}")
+        return certo
+    def mostrar_operacao(self) -> None:
+        print(f"{self.valor1} {self._op_simbolo} {self.valor2}")
